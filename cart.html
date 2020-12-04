@@ -31,41 +31,6 @@
             <th>Total</th>
             <th></th>
         </tr>
-        <!-- <tr align="center">
-            <td>
-                <span>
-                    <img src="images/1.jpg" width="70px">
-                    <h4>bla bla bal</h4>
-                </span>
-            </td>
-            <td>Lorem Ipsum is simply dummy text of the printing and typesetting</td>
-            <td>50 LE</td>
-            <td>
-                <input type="number" value="1" min="1" class="inp-width">
-            </td>
-            <td>50 LE</td>
-            <td>
-                <button class="btn1 black-btn" type="button">Remove</button>
-            </td>
-        </tr>
-        <tr align="center">
-            <td>
-                <span>
-                    <img src="images/2.jpg" width="70px ">
-                    <h4>bla2 bla2 bal2</h4>
-                </span>
-            </td>
-            <td>Lorem Ipsum is simply dummy text of the printing and typesetting</td>
-            <td>60 LE</td>
-            <td>
-                <input type="number" value="1" min="1" class="inp-width">
-            </td>
-            <td>121 LE</td>
-            <td>
-                <button class="btn1 black-btn" type="button" onclick="deleteRow(this)">Remove</button>
-            </td>
-        </tr> -->
-        <!--  <tr id="dynm_tr" align="center"></tr> -->
     </table>
 
     <div class="container right">
@@ -79,15 +44,22 @@
 
     <script>
 
-        array = ["1", "2"];
+        var obj1 = { srcImg: "images/1.jpg", name: "bla2q bla2 bal2", desc: "bla bal", price: "33 LE", quantity: "2" };
+        var obj2 = { srcImg: "images/2.jpg", name: "blrr rtt yyu2", desc: "blauuuu bal", price: "99 LE", quantity: "1" };
+        var array = [obj1, obj2];
+        localStorage.setItem("cartArray", JSON.stringify(array));
+
+
+        var storedArray = JSON.parse(localStorage.getItem("cartArray"));
+
         var tr_node;
-        array.forEach(element => {
+        storedArray.forEach(element => {
             tr_node = document.createElement("tr");
             tr_node.setAttribute('align', 'center');
-            createImge("images/1.jpg", "bla2q bla2 bal2");
-            createDesc("descsss");
-            createPrice("34 LE");
-            createQuan('2');
+            createImge(element.srcImg, element.name);
+            createDesc(element.desc);
+            createPrice(element.price);
+            createQuan(element.quantity);
             createTotal();
             createBtn();
             document.getElementById("tbl").appendChild(tr_node);
@@ -119,7 +91,7 @@
 
         function createPrice(price) {
             var td3_node = document.createElement("td");
-            var td3_txt_node = document.createTextNode( price );
+            var td3_txt_node = document.createTextNode(price);
             td3_node.appendChild(td3_txt_node);
             tr_node.appendChild(td3_node);
         }
@@ -150,6 +122,9 @@
             btn_node.classList.add("black-btn");
             btn_node.appendChild(btn_txt_node);
             btn_node.onclick = function () {
+
+                var i = btn_node.parentNode.parentNode.rowIndex;
+                document.getElementById("tbl").deleteRow(i);
 
             }
             td5_node.appendChild(btn_node);
