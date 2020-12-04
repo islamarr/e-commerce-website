@@ -34,7 +34,7 @@
     </table>
 
     <div class="container right">
-        <h4>Total Price = 171 LE</h4>
+        <h4 id="total"></h4>
     </div>
     <div class="container button-wrap">
         <button class="btn2 black-btn" type="button">Continue Shopping</button>
@@ -45,8 +45,8 @@
     <script>
 
 
-        var obj1 = { srcImg: "images/1.jpg", name: "bla2q bla2 bal2", desc: "bla bal" , price: "33 LE" , quantity: "2" };
-        var obj2 = { srcImg: "images/2.jpg", name: "blrr rtt yyu2", desc: "blauuuu bal" , price: "99 LE" , quantity: "1" };
+        var obj1 = { srcImg: "images/1.jpg", name: "bla2q bla2 bal2", desc: "bla bal", price: "10 LE", quantity: "4" };
+        var obj2 = { srcImg: "images/2.jpg", name: "blrr rtt yyu2", desc: "blauuuu bal", price: "90 LE", quantity: "1" };
         var array = [obj1, obj2];
         localStorage.setItem("cartArray", JSON.stringify(array));
 
@@ -54,26 +54,35 @@
         var storedArray = JSON.parse(localStorage.getItem("cartArray"));
 
 
+        var tr_node, td_node;
+        var total =0;
 
-
-        var tr_node;
         storedArray.forEach(element => {
             tr_node = document.createElement("tr");
             tr_node.setAttribute('align', 'center');
+
             createImge(element.srcImg, element.name);
             createDesc(element.desc);
             createPrice(element.price);
             createQuan(element.quantity);
-            createTotal();
+            
+            var totalPr = parseInt(element.price) * parseInt(element.quantity);
+            var txt = String(totalPr);
+            var res = txt.concat(" LE");
+            createTotal(res);
             createBtn();
+
             document.getElementById("tbl").appendChild(tr_node);
+
+            calculateTotal(parseInt (totalPr) );
+            
         });
 
         function createImge(img_src, txt) {
 
-            var td1_node = document.createElement("td");
+            td_node = document.createElement("td");
             var span_node = document.createElement("span");
-            td1_node.appendChild(span_node);
+            td_node.appendChild(span_node);
             var img_node = document.createElement("img");
             img_node.src = img_src;
             img_node.width = "70";
@@ -82,44 +91,44 @@
             var h4_txt_node = document.createTextNode(txt);
             h4_node.appendChild(h4_txt_node);
             span_node.appendChild(h4_node);
-            tr_node.appendChild(td1_node);
+            tr_node.appendChild(td_node);
         }
 
 
         function createDesc(desc) {
-            var td2_node = document.createElement("td");
+            td_node = document.createElement("td");
             var td2_txt_node = document.createTextNode(desc);
-            td2_node.appendChild(td2_txt_node);
-            tr_node.appendChild(td2_node);
+            td_node.appendChild(td2_txt_node);
+            tr_node.appendChild(td_node);
         }
 
         function createPrice(price) {
-            var td3_node = document.createElement("td");
+            td_node = document.createElement("td");
             var td3_txt_node = document.createTextNode(price);
-            td3_node.appendChild(td3_txt_node);
-            tr_node.appendChild(td3_node);
+            td_node.appendChild(td3_txt_node);
+            tr_node.appendChild(td_node);
         }
 
         function createQuan(num) {
-            var td4_node = document.createElement("td");
+            td_node = document.createElement("td");
             var inpt = document.createElement("input");
             inpt.setAttribute('type', 'number');
             inpt.setAttribute('value', num);
             inpt.setAttribute('min', '1');
             inpt.setAttribute('class', 'inp-width');
-            td4_node.appendChild(inpt);
-            tr_node.appendChild(td4_node);
+            td_node.appendChild(inpt);
+            tr_node.appendChild(td_node);
         }
 
-        function createTotal() {
-            var td3_node = document.createElement("td");
-            var td3_txt_node = document.createTextNode("111 LE");
-            td3_node.appendChild(td3_txt_node);
-            tr_node.appendChild(td3_node);
+        function createTotal(txt) {
+            td_node = document.createElement("td");
+            var td3_txt_node = document.createTextNode(txt);
+            td_node.appendChild(td3_txt_node);
+            tr_node.appendChild(td_node);
         }
 
         function createBtn() {
-            var td5_node = document.createElement("td");
+            td_node = document.createElement("td");
             var btn_node = document.createElement("button");
             var btn_txt_node = document.createTextNode("Remove");
             btn_node.classList.add("btn1");
@@ -131,11 +140,20 @@
                 document.getElementById("tbl").deleteRow(i);
 
             }
-            td5_node.appendChild(btn_node);
-            tr_node.appendChild(td5_node);
+            td_node.appendChild(btn_node);
+            tr_node.appendChild(td_node);
         }
 
+        function calculateTotal(pr) {
+            console.log(pr);
+            total = total+ pr;
+            var str1 = "Total Price = ";
+            var str2 = total;
+            var str3 = " LE";
+            var res = str1.concat(str2, str3);
 
+            document.getElementById("total").innerHTML = res;
+        }
 
 
 
