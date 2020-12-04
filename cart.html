@@ -44,13 +44,17 @@
 
     <script>
 
-        var obj1 = { srcImg: "images/1.jpg", name: "bla2q bla2 bal2", desc: "bla bal", price: "33 LE", quantity: "2" };
-        var obj2 = { srcImg: "images/2.jpg", name: "blrr rtt yyu2", desc: "blauuuu bal", price: "99 LE", quantity: "1" };
+
+        var obj1 = { srcImg: "images/1.jpg", name: "bla2q bla2 bal2", desc: "bla bal" , price: "33 LE" , quantity: "2" };
+        var obj2 = { srcImg: "images/2.jpg", name: "blrr rtt yyu2", desc: "blauuuu bal" , price: "99 LE" , quantity: "1" };
         var array = [obj1, obj2];
         localStorage.setItem("cartArray", JSON.stringify(array));
 
 
         var storedArray = JSON.parse(localStorage.getItem("cartArray"));
+
+
+
 
         var tr_node;
         storedArray.forEach(element => {
