@@ -22,7 +22,7 @@
     <hr class="line container">
 
 
-    <table class="container tb">
+    <table id="tbl" class="container tb">
         <tr class="heading">
             <th>Name</th>
             <th>Description</th>
@@ -31,10 +31,10 @@
             <th>Total</th>
             <th></th>
         </tr>
-        <tr align="center">
+        <!-- <tr align="center">
             <td>
                 <span>
-                    <img src="images/1.jpg" width="30px">
+                    <img src="images/1.jpg" width="70px">
                     <h4>bla bla bal</h4>
                 </span>
             </td>
@@ -51,7 +51,7 @@
         <tr align="center">
             <td>
                 <span>
-                    <img src="images/2.jpg" width="30px">
+                    <img src="images/2.jpg" width="70px ">
                     <h4>bla2 bla2 bal2</h4>
                 </span>
             </td>
@@ -64,19 +64,100 @@
             <td>
                 <button class="btn1 black-btn" type="button">Remove</button>
             </td>
-        </tr>
+        </tr> -->
+        <tr id="dynm_tr" align="center"></tr>
     </table>
 
     <div class="container right">
-        <h4>Total Price = 171 LE</h4>        
+        <h4>Total Price = 171 LE</h4>
     </div>
     <div class="container button-wrap">
         <button class="btn2 black-btn" type="button">Continue Shopping</button>
         <button class="btn2 black-btn" type="button">Proceed to checkout</button>
-        
-       
     </div>
 
+
+    <script>
+
+
+
+        function createImge() {
+
+            var td1_node = document.createElement("td");
+            var span_node = document.createElement("span");
+            td1_node.appendChild(span_node);
+            var img_node = document.createElement("img");
+            img_node.src = "images/1.jpg";
+            img_node.width = "70";
+            span_node.appendChild(img_node);
+            var h4_node = document.createElement("h4");
+            var h4_txt_node = document.createTextNode("bla2 bla2 bal2");
+            h4_node.appendChild(h4_txt_node);
+            span_node.appendChild(h4_node);
+            document.getElementById("dynm_tr").appendChild(td1_node);
+        }
+
+
+        function createDesc() {
+            var td2_node = document.createElement("td");
+            var td2_txt_node = document.createTextNode("desc");
+            td2_node.appendChild(td2_txt_node);
+            document.getElementById("dynm_tr").appendChild(td2_node);
+        }
+
+        function createPrice() {
+            var td3_node = document.createElement("td");
+            var td3_txt_node = document.createTextNode("33 LE");
+            td3_node.appendChild(td3_txt_node);
+            document.getElementById("dynm_tr").appendChild(td3_node);
+        }
+
+        function createQuan() {
+            var td4_node = document.createElement("td");
+            var inpt = document.createElement("input");
+            inpt.setAttribute('type', 'number');
+            inpt.setAttribute('value', '1');
+            inpt.setAttribute('min', '1');
+            inpt.setAttribute('class', 'inp-width');
+            td4_node.appendChild(inpt);
+            document.getElementById("dynm_tr").appendChild(td4_node);
+        }
+
+        function createTotal() {
+            var td3_node = document.createElement("td");
+            var td3_txt_node = document.createTextNode("111 LE");
+            td3_node.appendChild(td3_txt_node);
+            document.getElementById("dynm_tr").appendChild(td3_node);
+        }
+
+        function createBtn() {
+            var td5_node = document.createElement("td");
+            var btn_node = document.createElement("button");
+            var btn_txt_node = document.createTextNode("Remove");
+            btn_node.classList.add("btn1");
+            btn_node.classList.add("black-btn");
+            btn_node.appendChild(btn_txt_node);
+            td5_node.appendChild(btn_node);
+            document.getElementById("dynm_tr").appendChild(td5_node);
+        }
+
+        array = ["1","2"];
+
+        array.forEach(element => {
+            
+            createImge();
+            createDesc();
+            createPrice();
+            createQuan();
+            createTotal();
+            createBtn();
+        });
+
+
+
+    </script>
+
 </body>
+
 
 </html>
