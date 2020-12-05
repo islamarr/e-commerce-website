@@ -4,14 +4,8 @@
 <head>
 
     <title>Cart</title>
-    <link rel="stylesheet" href="normailze.css">
-    <link rel="stylesheet" href="style.css">
-
-    <style type="text/css">
-
-
-
-    </style>
+    <link rel="stylesheet" href="assets/style/cart-normailze.css">
+    <link rel="stylesheet" href="assets/style/cart-style.css">
 
 </head>
 
@@ -22,7 +16,8 @@
     <hr class="line container">
 
 
-    <table class="container tb">
+    <!-- Table of the products in my cart -->
+    <table id="tbl" class="container tb">
         <tr class="heading">
             <th>Name</th>
             <th>Description</th>
@@ -31,52 +26,65 @@
             <th>Total</th>
             <th></th>
         </tr>
-        <tr align="center">
-            <td>
-                <span>
-                    <img src="images/1.jpg" width="30px">
-                    <h4>bla bla bal</h4>
-                </span>
-            </td>
-            <td>Lorem Ipsum is simply dummy text of the printing and typesetting</td>
-            <td>50 LE</td>
-            <td>
-                <input type="number" value="1" min="1" class="inp-width">
-            </td>
-            <td>50 LE</td>
-            <td>
-                <button class="btn1 black-btn" type="button">Remove</button>
-            </td>
-        </tr>
-        <tr align="center">
-            <td>
-                <span>
-                    <img src="images/2.jpg" width="30px">
-                    <h4>bla2 bla2 bal2</h4>
-                </span>
-            </td>
-            <td>Lorem Ipsum is simply dummy text of the printing and typesetting</td>
-            <td>60 LE</td>
-            <td>
-                <input type="number" value="1" min="1" class="inp-width">
-            </td>
-            <td>121 LE</td>
-            <td>
-                <button class="btn1 black-btn" type="button">Remove</button>
-            </td>
-        </tr>
     </table>
 
     <div class="container right">
-        <h4>Total Price = 171 LE</h4>        
-    </div>
-    <div class="container button-wrap">
-        <button class="btn2 black-btn" type="button">Continue Shopping</button>
-        <button class="btn2 black-btn" type="button">Proceed to checkout</button>
-        
-       
+        <h4 id="total"></h4>
     </div>
 
+
+    <div id="btns" class="container button-wrap">
+        <button class="btn2 black-btn" type="button" onclick="location.href='#'">Continue Shopping</button>
+        <button id="checkoutBtn" class="btn2 black-btn" type="button" onclick="location.href='#'">Proceed to
+            checkout</button>
+    </div>
+
+    <!-- Empty Cart -->
+    <div id="empty_cart" class="container" style="display: none; text-align:center;">
+        <img src="assets/images/cart-emptyCart.png" width="50%">
+        <div style="text-align:center; margin-top: 30px;">
+            <button class="btn2 black-btn" type="button" onclick="location.href='#'">Continue Shopping</button>
+        </div>
+    </div>
+
+    <div style="margin-bottom: 50px;"></div>
+
+    <!-- Footer Starts here -->
+    <footer>
+        <div class="footer-paragraph">
+            This is filler to fill the place with a lot of words but I'm tired of lorem.
+            <hr>
+        </div>
+        <div class="new">
+            <form action="">
+                <label for="">
+                    News Letter
+                </label>
+                <input type="text" name="" id="" placeholder="Your Email">
+                <input type="submit" value="subscribe">
+            </form>
+        </div>
+        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking
+            at its layout. The point of using Lorem.
+            <br>
+            It has been programmed & designed by Hefny Team.
+        </p>
+        <p>
+            Great Thanks to Mostafa & Islam for their efforts for the idea <3 . </p>
+                <hr>
+                <div class="copyrights">
+                    <a href="#">
+                        This project is for iti 3 months SWD track in Sohag.
+                    </a>
+                </div>
+    </footer>
+    <!-- Footer Ends here -->
+
+    <script src="assets/main.js">
+
+    </script>
+
 </body>
+
 
 </html>
