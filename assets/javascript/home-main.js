@@ -24,7 +24,7 @@ function addCartIcon() {
         elements[i].innerHTML = cartItem;
     }
 }
-
+// this function will add the item to the cart and the local Storge
 function addItem(id) {
     addCartIcon()
     console.log(id);
