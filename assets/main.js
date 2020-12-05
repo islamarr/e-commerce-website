@@ -1,9 +1,24 @@
+/* Islam Functions  */
 
+var array = [];
+var id = 1;
+var srcImg = "assets/images/cart-1.jpg";
+var name = "bla2q bla2 bal2";
+var desc = "desc cccccccccccc bal";
+var price = "10 LE";
+var quantity = "3";
+var obj1 = {
+    id: id, srcImg: srcImg, name: name, desc: desc, price: price, quantity: quantity
+}
+array.push(obj1);
+console.log(array);
 
-var obj1 = { id: 1, srcImg: "assets/images/cart-1.jpg", name: "bla2q bla2 bal2", desc: "bla bal", price: "10 LE", quantity: "4" };
 var obj2 = { id: 2, srcImg: "assets/images/cart-2.jpg", name: "blrr rtt yyu2", desc: "blauuuu bal", price: "90 LE", quantity: "1" };
 var array = [obj1, obj2];
 localStorage.setItem("cartArray", JSON.stringify(array));
+
+
+
 
 var tr_node, td_node;
 var total = 0;
@@ -11,7 +26,7 @@ var total = 0;
 var storedArray = JSON.parse(localStorage.getItem("cartArray"));
 
 if (storedArray === undefined || storedArray.length == 0) {
-    setEmptyArray();
+    setEmptyCart();
 }
 
 storedArray.forEach(element => {
@@ -21,22 +36,22 @@ storedArray.forEach(element => {
     createImge(element.srcImg, element.name, element.id);
     createDesc(element.desc);
     createPrice(element.price);
-    createQuan(element.quantity);
+    createQuantity(element.quantity);
 
-    var totalPr = parseInt(element.price) * parseInt(element.quantity);
-    var txt = String(totalPr);
+    var totalElementPrice = parseInt(element.price) * parseInt(element.quantity);
+    var txt = String(totalElementPrice);
     var res = txt.concat(" LE");
-    createTotal(res);
-    createBtn();
+    createTotalElementPrice(res);
+    createRemovedBtn();
 
     document.getElementById("tbl").appendChild(tr_node);
 
-    total = total + parseInt(totalPr);
-    calculateTotal(total);
+    total = total + parseInt(totalElementPrice);
+    setTotalText();
 
 });
 
-function setEmptyArray() {
+function setEmptyCart() {
 
     document.getElementById("tbl").style.display = "none";
     document.getElementById("btns").style.display = "none";
@@ -51,7 +66,7 @@ function createImge(img_src, txt, id) {
     td_node.appendChild(span_node);
     var img_node = document.createElement("img");
     img_node.src = img_src;
-    img_node.width = "70";
+    img_node.width = "100";
     span_node.appendChild(img_node);
     var h4_node = document.createElement("h4");
     var h4_txt_node = document.createTextNode(txt);
@@ -82,25 +97,30 @@ function createPrice(price) {
     tr_node.appendChild(td_node);
 }
 
-function createQuan(num) {
+function createQuantity(num) {
     td_node = document.createElement("td");
     var inpt = document.createElement("input");
     inpt.setAttribute('type', 'number');
     inpt.setAttribute('value', num);
     inpt.setAttribute('min', '1');
     inpt.setAttribute('class', 'inp-width');
+
     td_node.appendChild(inpt);
     tr_node.appendChild(td_node);
+
+    inpt.addEventListener('input', function (evt) {
+        setPriceByChangeCount(this.value, inpt);
+    });
 }
 
-function createTotal(txt) {
+function createTotalElementPrice(txt) {
     td_node = document.createElement("td");
     var td_txt_node = document.createTextNode(txt);
     td_node.appendChild(td_txt_node);
     tr_node.appendChild(td_node);
 }
 
-function createBtn() {
+function createRemovedBtn() {
     td_node = document.createElement("td");
     var btn_node = document.createElement("button");
     var btn_txt_node = document.createTextNode("Remove");
@@ -109,8 +129,13 @@ function createBtn() {
     btn_node.appendChild(btn_txt_node);
     btn_node.onclick = function () {
 
-        setPrice(parseInt(btn_node.parentNode.parentNode.childNodes[4].textContent));
-        clearItemFromLocaleStorage(btn_node.parentNode.parentNode.childNodes[0].childNodes[0].childNodes[2].value);
+        var totalElementPrice = btn_node.parentNode.parentNode.childNodes[4];
+        total = total - parseInt(totalElementPrice.textContent);
+        setTotalText();
+        checkEmpty();
+
+        var idNode = btn_node.parentNode.parentNode.childNodes[0].childNodes[0].childNodes[2];
+        clearItemFromLocaleStorage(idNode.value);
 
         var index = btn_node.parentNode.parentNode.rowIndex;
         document.getElementById("tbl").deleteRow(index);
@@ -121,9 +146,7 @@ function createBtn() {
     tr_node.appendChild(td_node);
 }
 
-function setPrice(removedPrice) {
-    total = total - removedPrice
-    calculateTotal(total);
+function checkEmpty() {
     if (total == 0) {
         var element = document.getElementById("checkoutBtn");
         element.parentNode.removeChild(element);
@@ -131,8 +154,23 @@ function setPrice(removedPrice) {
         var element = document.getElementById("total");
         element.parentNode.removeChild(element);
 
-        setEmptyArray();
+        setEmptyCart();
     }
+}
+
+function setPriceByChangeCount(counter, input) {
+    var price_input = input.parentNode.parentNode.childNodes[2];
+    var price = parseInt(price_input.textContent);
+
+    var result = String(price * counter);
+    var txt = result.concat(" LE");
+    var totalElementPrice = input.parentNode.parentNode.childNodes[4];
+    totalElementPrice.textContent = txt;
+
+    var id = input.parentNode.parentNode.childNodes[0].childNodes[0].childNodes[2].value;
+    editQuantityInLocaleStorage(id, counter);
+
+    reCaculateTotal();
 
 }
 
@@ -152,7 +190,34 @@ function clearItemFromLocaleStorage(id) {
     localStorage.setItem("cartArray", JSON.stringify(newArray));
 }
 
-function calculateTotal(pr) {
+function editQuantityInLocaleStorage(id, newValue) {
+    var newArray = [];
+    if (total != 0) {
+        storedArray.forEach(element => {
+            if (element.id == id) {
+                element.quantity = newValue;
+            }
+            newArray.push(element);
+
+        });
+
+    }
+
+    localStorage.setItem("cartArray", JSON.stringify(newArray));
+}
+
+function reCaculateTotal() {
+    total = 0;
+    storedArray.forEach(element => {
+        var totalElementPrice = parseInt(element.price) * parseInt(element.quantity);
+        total = total + totalElementPrice;
+
+    });
+
+    setTotalText();
+}
+
+function setTotalText() {
 
     var str1 = "Total Price = ";
     var str2 = total;
@@ -162,8 +227,5 @@ function calculateTotal(pr) {
     document.getElementById("total").innerHTML = res;
 }
 
-function openHome () {
-
-}
 
 
