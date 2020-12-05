@@ -1,21 +1,23 @@
 body {
     padding: 5% 10%;
     background-color: #white;
+    display: grid;
+    grid-template-rows: 30% 70%;
+    grid-gap: 35px;
 }
 
 .pdt {
     display: grid;
     /* grid-template-columns: 50% 50%; */
-    grid-template-columns: minmax(300px, 1fr) minmax(300px, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     justify-items: stretch;
     grid-gap: 35px;
-    row-gap: 35px;
 }
 
 .pdt-img {
     display: grid;
     border: 5px solid #dddddd;
-    padding: 10%;
+    padding: 1%;
     place-items: center;
 }
 
@@ -49,8 +51,4 @@ button#add-to-cart {
     font-size: large;
     border: 2px solid #dddddd;
     padding: 1%;
-}
-
-.padder {
-    display: none;
 }
