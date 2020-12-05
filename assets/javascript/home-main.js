@@ -27,21 +27,30 @@ function addCartIcon() {
 }
 // this function will call the function of adding item to the local storage and the function of changing the cart items icon
 function addItem(id) {
-    addCartIcon()
-    console.log(id);
+    addCartIcon();
     getProduct(id);
 
 }
 
 
 // function to get the product from the API .. and calling saveItem function to add the product as an object in the local storage 
-function getProduct(productID) {
-    var xhr = new XMLHttpRequest();             
-
-    xhr.open("get", "https://fakestoreapi.com/products/" + productID, true);
-    xhr.onreadystatechange = response(xhr);
+function getProduct(id) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("get", "https://fakestoreapi.com/products/" + id, true);
+    xhr.onreadystatechange = function (){
+            if (xhr.readyState == 4 && xhr.status == 200) 
+                {
+                    let products = xhr.responseText;
+                    let prdObject = JSON.parse(products);
+                    prdObject.quantity = 1;
+                    saveItem(prdObject);
+                }
+        };
+    
+    
     xhr.send();
-}
+        
+    }
 
 
 // function to check the respond from the API 
@@ -53,6 +62,7 @@ function response(xhr){
                 let prdObject = JSON.parse(products);
                 prdObject.quantity = 1;
                 saveItem(prdObject);
+                console.log(prdObject);
                 break;
             case 404:
                 alert("Item not Found...");
