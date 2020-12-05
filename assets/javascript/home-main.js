@@ -47,41 +47,15 @@ function getProduct(id) {
                 }
         };
     
-    
     xhr.send();
         
     }
 
 
-// function to check the respond from the API 
-function response(xhr){
-    if (xhr.readyState == 4) {
-        switch (xhr.status) {
-            case 200:
-                let products = xhr.responseText;
-                let prdObject = JSON.parse(products);
-                prdObject.quantity = 1;
-                saveItem(prdObject);
-                console.log(prdObject);
-                break;
-            case 404:
-                alert("Item not Found...");
-                break;
-            case 500:
-                alert("There is a problem in the Server...");
-                break;
-            default:
-                alert("Something went wrong, please refresh the page");
-                break;
-        }
-    }
-
-}
-
-
 // add the product to the storage script
 var array = [];                     
 function saveItem(product) {
+    var x = localStorage.getItem("cartArray");
     array.push(product);
     localStorage.setItem("cartArray", JSON.stringify(array));
 }
