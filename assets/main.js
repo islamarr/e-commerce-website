@@ -11,7 +11,7 @@ var obj1 = {
     id: id, srcImg: srcImg, name: name, desc: desc, price: price, quantity: quantity
 }
 array.push(obj1);
-console.log(array);
+//console.log(array);
 
 var obj2 = { id: 2, srcImg: "assets/images/cart-2.jpg", name: "blrr rtt yyu2", desc: "blauuuu bal", price: "90 LE", quantity: "1" };
 var array = [obj1, obj2];
@@ -129,13 +129,13 @@ function createRemovedBtn() {
     btn_node.appendChild(btn_txt_node);
     btn_node.onclick = function () {
 
+        var idNode = btn_node.parentNode.parentNode.childNodes[0].childNodes[0].childNodes[2];
+        clearItemFromLocaleStorage(idNode.value);
+
         var totalElementPrice = btn_node.parentNode.parentNode.childNodes[4];
         total = total - parseInt(totalElementPrice.textContent);
         setTotalText();
         checkEmpty();
-
-        var idNode = btn_node.parentNode.parentNode.childNodes[0].childNodes[0].childNodes[2];
-        clearItemFromLocaleStorage(idNode.value);
 
         var index = btn_node.parentNode.parentNode.rowIndex;
         document.getElementById("tbl").deleteRow(index);
@@ -147,7 +147,10 @@ function createRemovedBtn() {
 }
 
 function checkEmpty() {
-    if (total == 0) {
+    var storedArray = JSON.parse(localStorage.getItem("cartArray"));
+
+    if (storedArray === undefined || storedArray.length == 0) {
+
         var element = document.getElementById("checkoutBtn");
         element.parentNode.removeChild(element);
 
@@ -176,23 +179,24 @@ function setPriceByChangeCount(counter, input) {
 
 function clearItemFromLocaleStorage(id) {
     var newArray = [];
-    if (total != 0) {
-        storedArray.forEach(element => {
-            if (element.id == id) return;
 
-            newArray.push(element);
+    var storedArray = JSON.parse(localStorage.getItem("cartArray"));
+    storedArray.forEach(element => {
+        console.log(element.id);
+        if (element.id == id) return;
+        newArray.push(element);
 
-        });
-
-    }
-
+    });
 
     localStorage.setItem("cartArray", JSON.stringify(newArray));
+
 }
 
 function editQuantityInLocaleStorage(id, newValue) {
     var newArray = [];
+    
     if (total != 0) {
+        var storedArray = JSON.parse(localStorage.getItem("cartArray"));
         storedArray.forEach(element => {
             if (element.id == id) {
                 element.quantity = newValue;
