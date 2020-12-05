@@ -11,7 +11,6 @@ var obj1 = {
     id: id, srcImg: srcImg, name: name, desc: desc, price: price, quantity: quantity
 }
 array.push(obj1);
-//console.log(array);
 
 var obj2 = { id: 2, srcImg: "assets/images/cart-2.jpg", name: "blrr rtt yyu2", desc: "blauuuu bal", price: "90 LE", quantity: "1" };
 var array = [obj1, obj2];
@@ -182,7 +181,6 @@ function clearItemFromLocaleStorage(id) {
 
     var storedArray = JSON.parse(localStorage.getItem("cartArray"));
     storedArray.forEach(element => {
-        console.log(element.id);
         if (element.id == id) return;
         newArray.push(element);
 
@@ -212,6 +210,8 @@ function editQuantityInLocaleStorage(id, newValue) {
 
 function reCaculateTotal() {
     total = 0;
+    
+    var storedArray = JSON.parse(localStorage.getItem("cartArray"));
     storedArray.forEach(element => {
         var totalElementPrice = parseInt(element.price) * parseInt(element.quantity);
         total = total + totalElementPrice;
