@@ -38,34 +38,72 @@
     </div>
     <div class="container button-wrap">
         <button class="btn2 black-btn" type="button">Continue Shopping</button>
-        <button class="btn2 black-btn" type="button">Proceed to checkout</button>
+        <button id="checkoutBtn" class="btn2 black-btn" type="button">Proceed to checkout</button>
     </div>
 
 
     <script>
 
+        /*  function getProduct() {
+ 
+             var xhr = new XMLHttpRequest();
+ 
+             var prdID = Number(1);
+ 
+             xhr.open("get", "https://fakestoreapi.com/products/" + 1, true);
+ 
+             xhr.onreadystatechange = function () {
+ 
+                 console.log("Inside Event, readyStat value:" + xhr.readyState);
+ 
+                 if (xhr.readyState == 4 && xhr.status == 200) {
+ 
+                     console.log("Inside Condition...");
+ 
+                     let products = xhr.responseText;
+ 
+                     //alert(products);
+ 
+                     let prdObject = JSON.parse(products);
+ 
+                     console.log(prdObject);
+                     //  showProduct(prdObject);
+ 
+                 }
+ 
+             };
+ 
+ 
+ 
+             xhr.send();
+ 
+             console.log("After Send...")
+ 
+         } */
 
-        var obj1 = { srcImg: "images/1.jpg", name: "bla2q bla2 bal2", desc: "bla bal", price: "10 LE", quantity: "4" };
-        var obj2 = { srcImg: "images/2.jpg", name: "blrr rtt yyu2", desc: "blauuuu bal", price: "90 LE", quantity: "1" };
+        // getProduct();
+
+
+
+        var obj1 = { id: 1, srcImg: "images/1.jpg", name: "bla2q bla2 bal2", desc: "bla bal", price: "10 LE", quantity: "4" };
+        var obj2 = { id: 2, srcImg: "images/2.jpg", name: "blrr rtt yyu2", desc: "blauuuu bal", price: "90 LE", quantity: "1" };
         var array = [obj1, obj2];
         localStorage.setItem("cartArray", JSON.stringify(array));
 
+        var tr_node, td_node;
+        var total = 0;
 
         var storedArray = JSON.parse(localStorage.getItem("cartArray"));
-
-
-        var tr_node, td_node;
-        var total =0;
 
         storedArray.forEach(element => {
             tr_node = document.createElement("tr");
             tr_node.setAttribute('align', 'center');
 
-            createImge(element.srcImg, element.name);
+            createImge(element.srcImg, element.name, element.id);
             createDesc(element.desc);
             createPrice(element.price);
             createQuan(element.quantity);
-            
+
             var totalPr = parseInt(element.price) * parseInt(element.quantity);
             var txt = String(totalPr);
             var res = txt.concat(" LE");
@@ -74,11 +112,12 @@
 
             document.getElementById("tbl").appendChild(tr_node);
 
-            calculateTotal(parseInt (totalPr) );
-            
+            total = total + parseInt(totalPr);
+            calculateTotal(total);
+
         });
 
-        function createImge(img_src, txt) {
+        function createImge(img_src, txt, id) {
 
             td_node = document.createElement("td");
             var span_node = document.createElement("span");
@@ -91,21 +130,28 @@
             var h4_txt_node = document.createTextNode(txt);
             h4_node.appendChild(h4_txt_node);
             span_node.appendChild(h4_node);
+
+            var inpt = document.createElement("input");
+            inpt.setAttribute('type', 'hidden');
+            inpt.setAttribute('value', id);
+
+            span_node.appendChild(inpt);
+
             tr_node.appendChild(td_node);
         }
 
 
         function createDesc(desc) {
             td_node = document.createElement("td");
-            var td2_txt_node = document.createTextNode(desc);
-            td_node.appendChild(td2_txt_node);
+            var td_txt_node = document.createTextNode(desc);
+            td_node.appendChild(td_txt_node);
             tr_node.appendChild(td_node);
         }
 
         function createPrice(price) {
             td_node = document.createElement("td");
-            var td3_txt_node = document.createTextNode(price);
-            td_node.appendChild(td3_txt_node);
+            var td_txt_node = document.createTextNode(price);
+            td_node.appendChild(td_txt_node);
             tr_node.appendChild(td_node);
         }
 
@@ -122,8 +168,8 @@
 
         function createTotal(txt) {
             td_node = document.createElement("td");
-            var td3_txt_node = document.createTextNode(txt);
-            td_node.appendChild(td3_txt_node);
+            var td_txt_node = document.createTextNode(txt);
+            td_node.appendChild(td_txt_node);
             tr_node.appendChild(td_node);
         }
 
@@ -136,17 +182,47 @@
             btn_node.appendChild(btn_txt_node);
             btn_node.onclick = function () {
 
-                var i = btn_node.parentNode.parentNode.rowIndex;
-                document.getElementById("tbl").deleteRow(i);
+                setPrice(parseInt(btn_node.parentNode.parentNode.childNodes[4].textContent));
+                clearItemFromLocaleStorage(btn_node.parentNode.parentNode.childNodes[0].childNodes[0].childNodes[2].value);
+                //  console.log();
+
+                var index = btn_node.parentNode.parentNode.rowIndex;
+                document.getElementById("tbl").deleteRow(index);
+
 
             }
             td_node.appendChild(btn_node);
             tr_node.appendChild(td_node);
         }
 
+        function setPrice(removedPrice) {
+            total = total - removedPrice
+            calculateTotal(total);
+            if (total == 0) {
+                var element = document.getElementById("checkoutBtn");
+                element.parentNode.removeChild(element);
+            }
+
+        }
+
+        function clearItemFromLocaleStorage(id) {
+            var newArray = [];
+            if (total != 0) {
+                storedArray.forEach(element => {
+                    if (element.id == id) return;
+
+                    newArray.push(element);
+
+                });
+
+            }
+
+            console.log(newArray);
+            localStorage.setItem("cartArray", JSON.stringify(newArray));
+        }
+
         function calculateTotal(pr) {
-            console.log(pr);
-            total = total+ pr;
+
             var str1 = "Total Price = ";
             var str2 = total;
             var str3 = " LE";
