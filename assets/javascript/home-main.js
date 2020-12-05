@@ -1,9 +1,10 @@
-setTimeout(function () {
+// function to make the preloader element display none after 2 seconds
+setTimeout(function () {                                        
     document.getElementById('loader').style.display = "none";
 }, 2000);
 
-
-var cartItem = localStorage.getItem("counter"); //declaring this variable to use it in the cart function
+//declaring this variable to use it in the cart function
+var cartItem = localStorage.getItem("counter"); 
 if (cartItem == null) {
     cartItem = 0;
 }
@@ -14,7 +15,7 @@ else {
         elements[i].innerHTML = cartItem;
     }
 }
-
+// function to make the cart icon change to how many items has been chosen to order
 function addCartIcon() {
     cartItem++;
     localStorage.setItem("counter", cartItem);
@@ -24,7 +25,7 @@ function addCartIcon() {
         elements[i].innerHTML = cartItem;
     }
 }
-// this function will add the item to the cart and the local Storge
+// this function will call the function of adding item to the local storage and the function of changing the cart items icon
 function addItem(id) {
     addCartIcon()
     console.log(id);
@@ -33,33 +34,48 @@ function addItem(id) {
 }
 
 
-// function to get the product from the API .. Created by Islam
-function getProduct(id) {
+// function to get the product from the API .. and calling saveItem function to add the product as an object in the local storage 
+function getProduct(productID) {
+    var xhr = new XMLHttpRequest();             
 
-    var xhr = new XMLHttpRequest();
-
-    var prdID = id;
-
-    xhr.open("get", "https://fakestoreapi.com/products/" + prdID, true);
-    xhr.onreadystatechange = function () {
-
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            let products = xhr.responseText;
-            let prdObject = JSON.parse(products);
-            prdObject.quantity = 1;
-            saveItem(prdObject);
-            console.log(prdObject);
-        }
-    };
+    xhr.open("get", "https://fakestoreapi.com/products/" + productID, true);
+    xhr.onreadystatechange = response(xhr);
     xhr.send();
-    console.log("After Send...");
 }
 
-var array = [];
+
+// function to check the respond from the API 
+function response(xhr){
+    if (xhr.readyState == 4) {
+        switch (xhr.status) {
+            case 200:
+                let products = xhr.responseText;
+                let prdObject = JSON.parse(products);
+                prdObject.quantity = 1;
+                saveItem(prdObject);
+                break;
+            case 404:
+                alert("Item not Found...");
+                break;
+            case 500:
+                alert("There is a problem in the Server...");
+                break;
+            default:
+                alert("Something went wrong, please refresh the page");
+                break;
+        }
+    }
+
+}
+
+
+// add the product to the storage script
+var array = [];                     
 function saveItem(product) {
     array.push(product);
     localStorage.setItem("cartArray", JSON.stringify(array));
 }
+
 // function to show the navbar when small screen apply
 function show() {
     document.getElementById("bar").style.display = "block";
@@ -91,5 +107,5 @@ function slider() {
     setTimeout(slider, 1500);
 }
 
-// adding product info to the product page
+
 
