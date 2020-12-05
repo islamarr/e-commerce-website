@@ -1,6 +1,6 @@
 /* Islam Functions  */
 
-var array = [];
+/* var array = [];
 var id = 1;
 var srcImg = "assets/images/cart-1.jpg";
 var name = "bla2q bla2 bal2";
@@ -15,7 +15,7 @@ array.push(obj1);
 var obj2 = { id: 2, srcImg: "assets/images/cart-2.jpg", name: "blrr rtt yyu2", desc: "blauuuu bal", price: "90 LE", quantity: "1" };
 var array = [obj1, obj2];
 localStorage.setItem("cartArray", JSON.stringify(array));
-
+ */
 
 
 
@@ -32,8 +32,8 @@ storedArray.forEach(element => {
     tr_node = document.createElement("tr");
     tr_node.setAttribute('align', 'center');
 
-    createImge(element.srcImg, element.name, element.id);
-    createDesc(element.desc);
+    createImge(element.image, element.title, element.id);
+    createDesc(element.description);
     createPrice(element.price);
     createQuantity(element.quantity);
 
@@ -192,7 +192,7 @@ function clearItemFromLocaleStorage(id) {
 
 function editQuantityInLocaleStorage(id, newValue) {
     var newArray = [];
-    
+
     if (total != 0) {
         var storedArray = JSON.parse(localStorage.getItem("cartArray"));
         storedArray.forEach(element => {
@@ -210,7 +210,7 @@ function editQuantityInLocaleStorage(id, newValue) {
 
 function reCaculateTotal() {
     total = 0;
-    
+
     var storedArray = JSON.parse(localStorage.getItem("cartArray"));
     storedArray.forEach(element => {
         var totalElementPrice = parseInt(element.price) * parseInt(element.quantity);
