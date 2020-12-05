@@ -29,7 +29,7 @@
                         <li><a href="#categories">Categories</a></li>
                         <li><a href="#about-us">About</a></li>
                         <li><a href="#contact">Contact us</a></li>
-                        <li><a href="#"><i class="fa fa-shopping-cart"></i> <span class="selectors"></span>
+                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> <span class="selectors"></span>
                         </a></li>
                     </ul>
                 </div>
@@ -47,7 +47,7 @@
                     <li><a href="#categories">Categories</a></li>
                     <li><a href="#about-us">About</a></li>
                     <li><a href="#contact">Contact us</a></li>
-                    <li><a href="#"><i class="fa fa-shopping-cart"></i>
+                    <li><a href="cart.html"><i class="fa fa-shopping-cart"></i>
                     <span class="selectors"></span>
                     </a></li>
                     <button id="hide" onclick="hide();"><i class="fa fa-arrow-up" aria-hidden="true"></i>
@@ -68,7 +68,7 @@
                         <span>OUR LATEST</span> OFFERS
                     </h2>
                     <p>
-                        <button onclick="addItem();"> <a href="#"> Shop Now </a></button>
+                        <button"> <a href="#categories"> Shop Now </a></button>
                     </p>
                 </div>
                 <div class="saleRightSide">
@@ -127,167 +127,230 @@
 
     </article>
     <!-- Trending Ends Here -->
-    <!-- Bags category Starts here -->
+    <!-- Normal category Starts here -->
     <article class="category">
         <section class="bags box"> 
-            <h3 class="text-center"> Featured <span> Laptop bags</span> collection </h3>
+            <h3 class="text-center"> Featured <span> collection</span> </h3>
             <div class="category-box">
                 <ul>
                     <li>
-                        <a href="">
-                            <img src="assets/images/bg.jpg" alt="">
-                            <p>Product Name</p><hr>
-                            <p>$80.00</p>
-                            <button onclick="addItem();">
-                                <a href="#">
-                                    add to Cart <i class="fa fa-shopping-cart"></i>
-                                </a>
-                            </button>
+                        <a href="product_details.html?id=1">
+                            <div class="productImage">
+                            <img src="assets/images/collection1.jpg" alt="">
+                            </div>
+                            <p>Fjallraven</p><hr>
+                            <p>$109.95</p>
                         </a>
+                            <button id="1" onclick="addItem(this.id);">
+                                add to Cart <i class="fa fa-shopping-cart"></i>
+                            </button>
                     </li>
                     <li>
-                        <a href="">
-                            <img src="assets/images/bg.jpg" alt="">
-                            <p>Product Name</p> <hr>
+                        <a href="product_details.html?id=2">
+                            <div class="productImage">
+                                <img src="assets/images/collection2.jpg" alt="">
+                            </div>
+                            <p>Mens Casual Premium Slim </p> <hr>
                             <p>$80.00</p>
-                            <button onclick="addItem();">
-                                <a href="">
-                                    add to Cart <i class="fa fa-shopping-cart"></i>
-                                </a>
-                            </button>
                         </a>
-                    </li>                <li>
-                        <a href="">
-                            <img src="assets/images/bg.jpg" alt="">
-                            <p>Product Name</p><hr>
-                            <p>$80.00</p>
-                            <button onclick="addItem();">
-                                <a href="">
-                                    add to Cart <i class="fa fa-shopping-cart"></i>
-                                </a>
+                            <button id="2" onclick="addItem(this.id);">
+                                add to Cart <i class="fa fa-shopping-cart"></i>
                             </button>
+                    </li>                
+                    <li>
+                        <a href="product_details.html?id=3">
+                            <div class="productImage">
+                                <img src="assets/images/collection3.jpg" alt="">
+                            </div>
+                            <p>Mens Cotton Jacket</p><hr>
+                            <p>$55.99</p>
                         </a>
-                    </li>                <li>
-                        <a href="">
-                            <img src="assets/images/bg.jpg" alt="">
-                            <p>Product Name</p> <hr>
-                            <p>$80.00</p>
-                            <button onclick="addItem();">
-                                <a href="">
-                                    add to Cart <i class="fa fa-shopping-cart"></i>
-                                </a>
+                            <button id="3" onclick="addItem(this.id);">
+                                add to Cart <i class="fa fa-shopping-cart"></i>
                             </button>
+                    </li>                
+                    <li>
+                        <a href="product_details.html?id=4">
+                            <div class="productImage">
+                                <img src="assets/images/collection4.jpg" alt="">
+                            </div>
+                            <p>Mens Casual Slim Fit</p> <hr>
+                            <p>$15.99</p>
                         </a>
+                            <button id="4" onclick="addItem(this.id);">
+                                add to Cart <i class="fa fa-shopping-cart"></i>
+                            </button>
                     </li>
                 </ul>
             </div>
         </section> 
-        <!-- Bags category End here -->
-        <!-- headphones category Starts here -->
+        <!-- Normal category End here -->
+        <!-- Women's Accessories category Starts here -->
         <section class="headphones box"> 
-            <h3 class="text-center"> Featured <span> Headphones</span> collection </h3>
+            <h3 class="text-center"> Featured <span> Women's Accessories</span> collection </h3>
             <div class="category-box">
                 <ul>
                     <li>
-                        <a href="">
-                            <img src="assets/images/bg2.jpg" alt="">
-                            <p>Product Name</p> <hr>
-                            <p>$80.00</p>
-                            <button onclick="addItem();">
-                                <a href="">
-                                    add to Cart <i class="fa fa-shopping-cart"></i>
-                                </a>
-                            </button>
+                        <a href="product_details.html?id=5">
+                            <div class="productImage">
+                                <img src="assets/images/collection5.jpg" alt="">
+                            </div>
+                            <p>John Hardy Women's</p> <hr>
+                            <p>$695.00</p>
                         </a>
+                            <button id="5" onclick="addItem(this.id);">
+                                add to Cart <i class="fa fa-shopping-cart"></i>
+                            </button>
                     </li>
                     <li>
-                        <a href="">
-                            <img src="assets/images/bg2.jpg" alt="">
-                            <p>Product Name</p> <hr>
-                            <p>$80.00</p>
-                            <button onclick="addItem();">
-                                <a href="">
-                                    add to Cart <i class="fa fa-shopping-cart"></i>
-                                </a>
-                            </button>
+                        <a href="product_details.html?id=6">
+                            <div class="productImage">
+                                <img src="assets/images/collection6.jpg" alt="">
+                            </div>
+                            <p>Solid Gold Petite Micropave</p> <hr>
+                            <p>$168.00</p>
                         </a>
-                    </li>                <li>
-                        <a href="">
-                            <img src="assets/images/bg2.jpg" alt="">
-                            <p>Product Name</p> <hr>
-                            <p>$80.00</p>
-                            <button onclick="addItem();">
-                                <a href="">
-                                    add to Cart <i class="fa fa-shopping-cart"></i>
-                                </a>
+                            <button id="6" onclick="addItem(this.id);">
+                                add to Cart <i class="fa fa-shopping-cart"></i>
                             </button>
+                    </li>                
+                    <li>
+                        <a href="product_details.html?id=7">
+                            <div class="productImage">
+                                <img src="assets/images/collection7.jpg" alt="">
+                            </div>
+                            <p>White Gold Plated Princess</p> <hr>
+                            <p>$9.99</p>
                         </a>
-                    </li>                <li>
-                        <a href="">
-                            <img src="assets/images/bg2.jpg" alt="">
-                            <p>Product Name</p><hr>
-                            <p>$80.00</p>
-                            <button onclick="addItem();">
-                                <a href="">
-                                    add to Cart <i class="fa fa-shopping-cart"></i>
-                                </a>
+                            <button id="7" onclick="addItem(this.id);">
+                                add to Cart <i class="fa fa-shopping-cart"></i>
                             </button>
+                    </li>                
+                    <li>
+                        <a href="product_details.html?id=8">
+                            <div class="productImage">
+                                <img src="assets/images/collection8.jpg" alt="">
+                            </div>
+                            <p>Pierced Owl Rose Gold</p> <hr>
+                            <p>$10.99</p>
                         </a>
+                            <button id="8" onclick="addItem(this.id);">
+                                add to Cart <i class="fa fa-shopping-cart"></i>
+                            </button>
                     </li>
                 </ul>
             </div>
         </section> 
-        <!-- headphones category Ends here here -->
-        <!-- Mouse category Starts here -->
+        <!-- Women's Accessories category Ends here here -->
+        <!-- Electronics category Starts here -->
         <section class="mouse box"> 
-            <h3 class="text-center"> Featured <span> Mouses</span> collection </h3>
+            <h3 class="text-center"> Featured <span> Electronics</span> collection </h3>
             <div class="category-box">
                 <ul>
                     <li>
-                        <a href="">
-                            <img src="assets/images/bg3.png" alt="">
-                            <p>Product Name</p> <hr>
-                            <p>$80.00</p>
-                            <button onclick="addItem();">
-                                <a href="">
-                                    add to Cart <i class="fa fa-shopping-cart"></i>
-                                </a>
-                            </button>
+                        <a href="product_details.html?id=9">
+                            <div class="productImage">
+                                <img src="assets/images/collection9.jpg" alt="">
+                            </div>
+                            <p>Portable External Hard Drive</p> <hr>
+                            <p>$64.00</p>
                         </a>
+                            <button id="9" onclick="addItem(this.id);">
+                                add to Cart <i class="fa fa-shopping-cart"></i>
+                            </button>
                     </li>
                     <li>
-                        <a href="">
-                            <img src="assets/images/bg3.png" alt="">
-                            <p>Product Name</p><hr>
-                            <p>$80.00</p>
-                            <button onclick="addItem();">
-                                <a href="">
-                                    add to Cart <i class="fa fa-shopping-cart"></i>
-                                </a>
-                            </button>
+                        <a href="product_details.html?id=10">
+                            <div class="productImage">
+                                <img src="assets/images/collection10.jpg" alt="">
+                            </div>
+                            <p>SanDisk SSD PLUS 1TB</p> <hr>
+                            <p>$109.00</p>
                         </a>
-                    </li>                <li>
-                        <a href="">
-                            <img src="assets/images/bg3.png" alt="">
-                            <p>Product Name</p> <hr>
-                            <p>$80.00</p>
-                            <button onclick="addItem();">
-                                <a href="">
-                                    add to Cart <i class="fa fa-shopping-cart"></i>
-                                </a>
+                            <button id="10" onclick="addItem(this.id);">
+                                add to Cart <i class="fa fa-shopping-cart"></i>
                             </button>
+                    </li>                
+                    <li>
+                        <a href="product_details.html?id=11">
+                            <div class="productImage">
+                                <img src="assets/images/collection11.jpg" alt="">
+                            </div>
+                            <p>Silicon Power 256GB</p> <hr>
+                            <p>$109.00</p>
                         </a>
-                    </li>                <li>
-                        <a href="">
-                            <img src="assets/images/bg3.png" alt="">
-                            <p>Product Name</p> <hr>
-                            <p>$80.00</p>
-                            <button onclick="addItem();">
-                                <a href="">
-                                    add to Cart <i class="fa fa-shopping-cart"></i>
-                                </a>
+                            <button id="11" onclick="addItem(this.id);">
+                                add to Cart <i class="fa fa-shopping-cart"></i>
                             </button>
+                    </li>               
+                    <li>
+                        <a href="product_details.html?id=12">
+                            <div class="productImage">
+                                <img src="assets/images/collection12.jpg" alt="">
+                            </div>
+                            <p>WD 4TB Gaming Drive</p> <hr>
+                            <p>$114.00</p>
                         </a>
+                            <button id="12" onclick="addItem(this.id);">
+                                add to Cart <i class="fa fa-shopping-cart"></i>
+                            </button>
+                    </li>
+                </ul>
+            </div>
+        </section> 
+        <!-- Electronic category Ends here here --> 
+        <!-- New Coming category Starts here -->
+        <section class="phone box"> 
+            <h3 class="text-center"> Featured <span> New Coming </span> collection </h3>
+            <div class="category-box">
+                <ul>
+                    <li>
+                        <a href="product_details.html?id=13">
+                            <div class="productImage">
+                                <img src="assets/images/collection13.jpg" alt="">
+                            </div>
+                            <p>WAcer SB220Q bi 21.5</p> <hr>
+                            <p>$599.00</p>
+                        </a>
+                            <button id="13" onclick="addItem(this.id);">
+                                add to Cart <i class="fa fa-shopping-cart"></i>
+                            </button>
+                    </li>
+                    <li>
+                        <a href="product_details.html?id=15">
+                            <div class="productImage">
+                                <img src="assets/images/collection14.jpg" alt="">
+                            </div>
+                            <p>Samsung 49-Inch Gaming Monitor</p> <hr>
+                            <p>$999.99</p>
+                        </a>
+                            <button id="14" onclick="addItem(this.id);">
+                                add to Cart <i class="fa fa-shopping-cart"></i>
+                            </button>
+                    </li>                
+                    <li>
+                        <a href="product_details.html?id=15">
+                            <div class="productImage">
+                                <img src="assets/images/collection15.jpg" alt="">
+                            </div>
+                            <p>BIYLACLESEN Women's</p> <hr>
+                            <p>$56.99</p>
+                        </a>
+                            <button id="15" onclick="addItem(this.id);">
+                                add to Cart <i class="fa fa-shopping-cart"></i>
+                            </button>
+                    </li>                
+                    <li>
+                        <a href="product_details.html?id=16">
+                            <div class="productImage">
+                                <img src="assets/images/collection16.jpg" alt="">
+                            </div>
+                            <p>Women's Removable Hooded Faux</p> <hr>
+                            <p>$29.95</p>
+                        </a>
+                            <button id="16" onclick="addItem(this.id);">
+                                add to Cart <i class="fa fa-shopping-cart"></i>
+                            </button>
                     </li>
                 </ul>
             </div>

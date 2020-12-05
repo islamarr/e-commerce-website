@@ -3,7 +3,7 @@
     }, 2000);
 
     var cartItem=0; // declaring this variable to use it in the cart function
-    function addItem(){
+    function addCartIcon(){
         cartItem++;
         var elements= document.querySelectorAll(".selectors");
         for (let i =0; i< 2 ;i++){
@@ -11,7 +11,51 @@
         elements[i].innerHTML = cartItem;
         }
     }
+    
+    function addItem(id){
+        addCartIcon()
+        console.log(id);
+        var x = getProduct(id);
+        localStorage.setItem("cartArray", x);
+    }
 
+
+    // function to get the product from the API .. Created by Islam
+    function getProduct(prdID) {
+
+        var xhr = new XMLHttpRequest();
+
+        var prdID = prdID;
+
+        xhr.open("get", "https://fakestoreapi.com/products/" + prdID, true);
+
+        xhr.onreadystatechange = function () {
+
+            console.log("Inside Event, readyStat value:" + xhr.readyState);
+
+            if (xhr.readyState == 4 && xhr.status == 200) {
+
+                console.log("Inside Condition...");
+
+                let products = xhr.responseText;
+
+                //alert(products);
+
+                let prdObject = JSON.parse(products);
+
+                console.log(prdObject);
+                //  showProduct(prdObject);
+
+            }
+
+        };
+
+
+        xhr.send();
+
+        console.log("After Send...")
+
+    }
     // function to show the navbar when small screen apply
     function show(){
     document.getElementById("bar").style.display="block";
@@ -43,5 +87,6 @@
         setTimeout(slider,1500);  
     }
 
+// adding product info to the product page
 
    

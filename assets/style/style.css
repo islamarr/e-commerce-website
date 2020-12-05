@@ -110,10 +110,11 @@ header ul li a:hover{
 }
 header nav .item{
     font-size: 16px;
+    line-height: 21px;
     background-color: red;
     color: white;
-    width: 18px;
-    height: 18px;
+    width: 25px;
+    height: 25px;
     display: inline-block;
     border-radius: 50%;
     text-align: center;
@@ -288,11 +289,18 @@ top: 20px;
     background-color: var(--bk-color);
 }
 .category .category-box ul li:hover img {
-    transform: scale(0.7);
+    transform: scale(0.9);
+}
+.category .category-box ul li .productImage{
+    padding-top: 20px;
+    width: 70%;
+    height: 60%;
+    margin: 0 auto;
 }
 .category .category-box ul li img{
-    width: 100%;
+    width:  100%;
     transition: 0.7s;
+    transform: scale(0.7);
 
 }
 .category .category-box ul li p{
@@ -311,18 +319,16 @@ top: 20px;
     border-radius: 5px;
     cursor: pointer;
     transition: 0.5s;
-    transform: scale(0.9);
-}
-.category .category-box ul li button:hover{
-    transform: scale(1);
-    background-color: black;
-}
-.category .category-box ul li button a{
     color: white;
     font-size: 20px;
     letter-spacing: 2px;
     line-height: 30px;
 }
+.category .category-box ul li button:hover{
+    transform: scale(0.8);
+    background-color: black;
+}
+
 /* Bags Category Ends Here */
 /* About us Style Starts here */
 .about-us{
