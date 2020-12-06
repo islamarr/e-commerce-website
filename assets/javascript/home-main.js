@@ -27,7 +27,6 @@ function addCartIcon() {
 }
 // this function will call the function of adding item to the local storage and the function of changing the cart items icon
 function addItem(id) {
-    addCartIcon();
     getProduct(id);
 
 }
@@ -42,7 +41,6 @@ function getProduct(id) {
                 {
                     let products = xhr.responseText;
                     let prdObject = JSON.parse(products);
-                    prdObject.quantity = 1;
                     saveItem(prdObject);
                 }
         };
@@ -50,14 +48,37 @@ function getProduct(id) {
     xhr.send();
         
     }
-
+function getCart() {
+    return JSON.parse(localStorage.getItem('cartArray'));
+}
 
 // add the product to the storage script
-var array = [];                     
-function saveItem(product) {
-    var x = localStorage.getItem("cartArray");
+var array = [];   
+       
+function saveItem(product,quantity = 1) {
+    var flag = true;
+    var cart= getCart();
+    if(cart != null){
+        for(let object of cart){
+            if( object.id ==  product.id){
+                alert("We have found an item with the same information in the cart, you can change the Quantity in the Cart Page");
+                flag = false;     
+            }
+        }
+        if (flag){
+            product.quantity = quantity;
+            setCart(product);           
+        }
+    }
+    else{
+        product.quantity = 1;
+        setCart(product);
+        }  
+}
+function setCart (product) {
     array.push(product);
     localStorage.setItem("cartArray", JSON.stringify(array));
+    addCartIcon();
 }
 
 // function to show the navbar when small screen apply
