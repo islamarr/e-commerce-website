@@ -3,6 +3,7 @@ setTimeout(function () {
     document.getElementById('loader').style.display = "none";
 }, 2000);
 
+
 //declaring this variable to use it in the cart function
 var cartItem = localStorage.getItem("counter"); 
 if (cartItem == null) {
@@ -49,35 +50,36 @@ function getProduct(id) {
         
     }
 function getCart() {
-    return JSON.parse(localStorage.getItem('cartArray'));
+    const cartArray = JSON.parse(localStorage.getItem('cartArray'))
+    console.log(`[getCart]`, cartArray)
+    return cartArray;
 }
 
 // add the product to the storage script
 var array = [];   
        
 function saveItem(product,quantity = 1) {
-    var flag = true;
-    var cart= getCart();
-    if(cart != null){
-        for(let object of cart){
-            if( object.id ==  product.id){
-                alert("We have found an item with the same information in the cart, you can change the Quantity in the Cart Page");
-                flag = false;     
-            }
-        }
-        if (flag){
-            product.quantity = quantity;
-            setCart(product);           
+    var cart= getCart() || [];
+    console.log('[saveItem] if', cart)
+    for(let index in cart){
+        const productInCart = cart[index]
+        if( productInCart.id ==  product.id){
+            console.log('[saveItem] current product in cart', productInCart)
+            productInCart.quantity += quantity;
+            cart[index] = productInCart
+            console.log('[saveItem] changed product in cart', productInCart)
+            setCart(cart);   
+            return     
         }
     }
-    else{
-        product.quantity = 1;
-        setCart(product);
-        }  
+    product.quantity = quantity;
+    cart.push(product)
+    setCart(cart);
+
 }
-function setCart (product) {
-    array.push(product);
-    localStorage.setItem("cartArray", JSON.stringify(array));
+function setCart (cartArray) {
+    console.log('[setCart] cartArray', cartArray)
+    localStorage.setItem("cartArray", JSON.stringify(cartArray));
     addCartIcon();
 }
 
