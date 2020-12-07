@@ -77,6 +77,7 @@ function saveItem(product,quantity = 1) {
     setCart(cart);
 
 }
+
 function setCart (cartArray) {
     console.log('[setCart] cartArray', cartArray)
     localStorage.setItem("cartArray", JSON.stringify(cartArray));
