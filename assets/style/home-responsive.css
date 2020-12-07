@@ -51,7 +51,7 @@
         font-size: 2rem;
     }
     .trending .trend-box .trend-category img {
-        width:  50%;
+        width:  80%;
     }
     /* Category Style */
     .category .category-box{
@@ -116,8 +116,24 @@
     *{
         box-sizing: border-box;
     }
+    .hotsale .saleLeftSide p{
+        transform: none;
+    }
     .category h3{
         line-height: 50px;
+    }
+    .trending .trend-box .trend-category h4{
+        font-size: 27px;
+        font-weight: normal;
+    }
+    .trending .trend-box .trend-category {
+        box-shadow: 0px 0px 12px lightgrey;
+        padding: 30px 0px;
+        width: 85%;
+
+    }
+    .trending .trend-box .trend-category{
+        pointer-events: none;
     }
     header{
         top: -5px;
