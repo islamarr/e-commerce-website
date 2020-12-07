@@ -146,10 +146,14 @@
     }
     footer p {
         line-height: 28px;
-        width: 100%;
+        width: 95%;
+
     }
     .copyrights a {
         padding: 10px;
         font-size: 15px;
+    }
+    footer .new input[type="submit"]{
+        margin-top: 20px;
     }
 }
