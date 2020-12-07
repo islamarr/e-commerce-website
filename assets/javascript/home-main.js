@@ -3,7 +3,6 @@ setTimeout(function () {
     document.getElementById('loader').style.display = "none";
 }, 2000);
 
-
 //declaring this variable to use it in the cart function
 var cartItem = localStorage.getItem("counter"); 
 if (cartItem == null) {
@@ -50,37 +49,35 @@ function getProduct(id) {
         
     }
 function getCart() {
-    const cartArray = JSON.parse(localStorage.getItem('cartArray'))
-    console.log(`[getCart]`, cartArray)
-    return cartArray;
+    return JSON.parse(localStorage.getItem('cartArray'));
 }
 
 // add the product to the storage script
 var array = [];   
        
 function saveItem(product,quantity = 1) {
-    var cart= getCart() || [];
-    console.log('[saveItem] if', cart)
-    for(let index in cart){
-        const productInCart = cart[index]
-        if( productInCart.id ==  product.id){
-            console.log('[saveItem] current product in cart', productInCart)
-            productInCart.quantity += quantity;
-            cart[index] = productInCart
-            console.log('[saveItem] changed product in cart', productInCart)
-            setCart(cart);   
-            return     
+    var flag = true;
+    var cart= getCart();
+    if(cart != null){
+        for(let object of cart){
+            if( object.id ==  product.id){
+                alert("You have already chosen this item and it's added to the cart, you can change it in the cart page");
+                flag = false;     
+            }
+        }
+        if (flag){
+            product.quantity = quantity;
+            setCart(product);           
         }
     }
-    product.quantity = quantity;
-    cart.push(product)
-    setCart(cart);
-
+    else{
+        product.quantity = 1;
+        setCart(product);
+        }  
 }
-
-function setCart (cartArray) {
-    console.log('[setCart] cartArray', cartArray)
-    localStorage.setItem("cartArray", JSON.stringify(cartArray));
+function setCart (product) {
+    array.push(product);
+    localStorage.setItem("cartArray", JSON.stringify(array));
     addCartIcon();
 }
 
